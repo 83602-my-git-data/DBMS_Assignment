@@ -40,7 +40,9 @@ select *from orders;
 select * from salespeople;
 select *from customers;
 ```
+
 # Answers
+
 ```
   KD3_SHAM_83602>select *from orders;
 +------+---------+------------+------+------+
@@ -85,6 +87,7 @@ KD3_SHAM_83602>select *from customers;
 +------+----------+----------+--------+------+
 7 rows in set (0.00 sec)
 ```
+
 # Assignments 2
 
 ```
@@ -121,7 +124,9 @@ It is a DML command
 3.select city,sname,snum,comm from salespeople;
 4.select rating,cname from customers where city='san jose';
 ```
+
 # Answers
+
 ```
 KD3_SHAM_83602>select onum,amt,odate from orders;
 +------+---------+------------+
@@ -169,7 +174,7 @@ KD3_SHAM_83602>select rating,cname from customers where city='san jose';
 |    300 | cisneros |
 +--------+----------+
 2 rows in set (0.00 sec)
-  
+
 ```
 
 # Assignments 5
@@ -182,7 +187,9 @@ KD3_SHAM_83602>select rating,cname from customers where city='san jose';
 5.select *from orders where not ((odate = '1990-10-03' or snum>1006) and amt >= 1500);
 6.select snum , sname , city , comm from salespeople where (comm > .12 or comm < .14);
 ```
+
 # Answers
+
 ```
 KD3_SHAM_83602>select * from orders where amt > 1000;
 +------+---------+------------+------+------+
@@ -258,6 +265,7 @@ KD3_SHAM_83602>select snum , sname , city , comm from salespeople where (comm > 
 +------+---------+-----------+------+
 5 rows in set (0.00 sec)
 ```
+
 # Assignments 6
 
 ```
@@ -269,7 +277,9 @@ KD3_SHAM_83602>select snum , sname , city , comm from salespeople where (comm > 
 6.select * from customers where cname like 'C%';
 7.select * from orders where amt != '0' OR amt != NULL ;
 ```
+
 # Answers
+
 ```
   KD3_SHAM_83602>select * from orders where odate between '1990-10-03' and '1990-10-04';
 +------+---------+------------+------+------+
@@ -357,6 +367,7 @@ KD3_SHAM_83602>select * from orders where amt != '0' OR amt != NULL ;
 10 rows in set (0.00 sec)
 
 ```
+
 # Assignments 7
 
 ```
@@ -369,7 +380,9 @@ KD3_SHAM_83602>select * from orders where amt != '0' OR amt != NULL ;
 or
 select odate, count(distinct o.snum) from orders o, salespeople S where o.snum=S.snum group by odate;
 ```
+
 # Answers
+
 ```
   KD3_SHAM_83602>select count(odate) from orders where odate='1990-10-03';
 +--------------+
@@ -442,6 +455,7 @@ KD3_SHAM_83602>select odate, count(distinct o.snum) from orders o, salespeople S
 +------------+------------------------+
 4 rows in set (0.00 sec)
 ```
+
 # Assignments 8
 
 ```
@@ -450,7 +464,9 @@ KD3_SHAM_83602>select odate, count(distinct o.snum) from orders o, salespeople S
 3.select rating ,cname,cnum from customers order by rating desc;
 4.select odate , count(onum) from orders group by odate order by 2 desc;
 ```
+
 # Answers
+
 ```
 KD3_SHAM_83602>select onum, s.snum, amt+amt*0.12 as commission from salespeople s, orders o where s.snum=o.snum;
 +------+------+------------+
@@ -506,7 +522,7 @@ KD3_SHAM_83602>select odate , count(onum) from orders group by odate order by 2 
 4 rows in set (0.00 sec)
 
 KD3_SHAM_83602>
-  
+
 ```
 
 # Assignments 9
@@ -527,7 +543,9 @@ from salespeople s , customers c , orders o
 where o.snum=c.snum and o.snum=s.snum
 having rating>100;
 ```
+
 # Answers
+
 ```
 KD3_SHAM_83602>select onum,cname from orders o, customers c where c.cnum = o.cnum;
 +------+----------+
@@ -597,8 +615,9 @@ KD3_SHAM_83602>select amt * comm ,rating commissions
 9 rows in set (0.00 sec)
 
 KD3_SHAM_83602>
-  
+
 ```
+
 # Assignments 10
 
 ```
@@ -615,8 +634,10 @@ select c.cname, c.city from customers c, customers d
  where d.rating = c.rating
  having cname = 'hoffman';
 ```
+
 # answers
-``` 
+
+```
  KD3_SHAM_83602>select s.sname , s.city , sp.sname from salespeople s , salespeople sp
     ->  where sp.city=s.city and s.snum< sp.snum;
 +-------+--------+--------+
@@ -674,14 +695,17 @@ WHERE c.cnum IN (
         FROM orders
     )
 );
- ```
- # Answers
- ```
-select total from (select snum , sum(amt) as total from orders group by snum) as totals
+
+3.select total from (select snum , sum(amt) as total from orders group by snum) as totals
 where total > (select max(amt) from orders);
+```
+
+# Answers
+
+```
 KD3_SHAM_83602>select * from orders
-    ->  where cnum = (
-    ->  select cnum from customers where cname = 'cisneros');
+   ->  where cnum = (
+   ->  select cnum from customers where cname = 'cisneros');
 +------+---------+------------+------+------+
 | onum | amt     | odate      | cnum | snum |
 +------+---------+------------+------+------+
@@ -692,16 +716,16 @@ KD3_SHAM_83602>select * from orders
 
 KD3_SHAM_83602>
 KD3_SHAM_83602> SELECT c.cname, c.rating
-    -> FROM customers c
-    -> WHERE c.cnum IN (
-    ->     SELECT o.cnum
-    ->     FROM orders o
-    ->     GROUP BY o.cnum
-    ->     HAVING AVG(o.amt) > (
-    ->         SELECT AVG(amt)
-    ->         FROM orders
-    ->     )
-    -> );
+   -> FROM customers c
+   -> WHERE c.cnum IN (
+   ->     SELECT o.cnum
+   ->     FROM orders o
+   ->     GROUP BY o.cnum
+   ->     HAVING AVG(o.amt) > (
+   ->         SELECT AVG(amt)
+   ->         FROM orders
+   ->     )
+   -> );
 +---------+--------+
 | cname   | rating |
 +---------+--------+
@@ -712,7 +736,7 @@ KD3_SHAM_83602> SELECT c.cname, c.rating
 
 KD3_SHAM_83602>
 KD3_SHAM_83602>select total from (select snum , sum(amt) as total from orders group by snum) as totals
-    -> where total > (select max(amt) from orders);
+   -> where total > (select max(amt) from orders);
 +----------+
 | total    |
 +----------+
@@ -720,3 +744,94 @@ KD3_SHAM_83602>select total from (select snum , sum(amt) as total from orders gr
 +----------+
 1 row in set (0.00 sec)
 ```
+
+# Assignments 12
+
+```
+select * from customers
+    where rating >= any(select c.rating from customers c, salespeople s where s.snum=c.snum);
+select * from salespeople
+     s where s.city not in (select c.city from customers c where c.snum=s.snum and c.city=s.city);
+select * from orders
+     where amt > any(select o.amt from orders o ,customers c where c.cnum=o.cnum and c.city='london');
+select * from orders
+  where amt >(select min(o.amt) from orders o ,customers c where c.cnum=o.cnum and c.city='london');
+select * from orders
+     where amt <(select max(o.amt) from orders o ,customers c where c.cnum=o.cnum and c.city='london');
+```
+# answer
+```
+KD3_SHAM_83602>select * from customers
+    ->     where rating >= any(select c.rating from customers c, salespeople s where s.snum=c.snum);
++------+----------+----------+--------+------+
+| cnum | cname    | city     | rating | snum |
++------+----------+----------+--------+------+
+| 2001 | hoffman  | london   |    100 | 1001 |
+| 2002 | giovanni | rome     |    200 | 1003 |
+| 2003 | liu      | san jose |    200 | 1002 |
+| 2004 | grass    | berlin   |    300 | 1002 |
+| 2006 | clemens  | london   |    100 | 1001 |
+| 2008 | cisneros | san jose |    300 | 1007 |
+| 2007 | pereira  | rome     |    100 | 1004 |
++------+----------+----------+--------+------+
+7 rows in set (0.00 sec)
+
+KD3_SHAM_83602>select * from salespeople
+    ->      s where s.city not in (select c.city from customers c where c.snum=s.snum and c.city=s.city);
++------+---------+-----------+------+
+| snum | sname   | city      | comm |
++------+---------+-----------+------+
+| 1002 | serres  | san joes  | 0.13 |
+| 1004 | motika  | london    | 0.11 |
+| 1007 | rifkin  | barcelona | 0.15 |
+| 1003 | axelrod | new york  | 0.10 |
++------+---------+-----------+------+
+4 rows in set (0.00 sec)
+
+KD3_SHAM_83602>select * from orders
+    ->      where amt > any(select o.amt from orders o ,customers c where c.cnum=o.cnum and c.city='london');
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+7 rows in set (0.00 sec)
+
+KD3_SHAM_83602>select * from orders
+    ->   where amt >(select min(o.amt) from orders o ,customers c where c.cnum=o.cnum and c.city='london');
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
+| 3011 | 9891.88 | 1990-10-06 | 2006 | 1001 |
++------+---------+------------+------+------+
+7 rows in set (0.00 sec)
+
+KD3_SHAM_83602>select * from orders
+    ->      where amt <(select max(o.amt) from orders o ,customers c where c.cnum=o.cnum and c.city='london');
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3008 | 4723.00 | 1990-10-05 | 2006 | 1001 |
+| 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
++------+---------+------------+------+------+
+9 rows in set (0.00 sec)
+```Database
