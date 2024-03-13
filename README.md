@@ -852,5 +852,10 @@ select a.ad from (select snum as ad from salespeople where city="san joes"
          select snum as a from customers where city="san jose") cd b  
          where a.ad != b.a;         
 
-select concat(0,"-",empno-1) a from Q4;
-select concat(empno+1,"-",0) b from Q4;
+select concat((empno-1),"-",(empno+1)) from Q4;
+
+select concat((empno+1)-4,"-",(empno-1)) from Q4;
+
+select (empno+1)-4 , empno-1 from Q4;
+
+select empno 
