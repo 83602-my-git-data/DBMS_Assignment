@@ -99,17 +99,16 @@ EMPNO
 -----------
 5
 9
-1
 14
-25
 20
+25
 Write a SELECT statement to display the range of missing numbers. Your output
 should be as follows:-
  MISSING
  ------------
  2 – 4
  6 – 8
- 10 – 13
+ 11 – 13
  15 – 19
  21 – 24
 
@@ -118,19 +117,18 @@ should be as follows:-
 # Answer 3
 
 ```
-select concat((empno+1)-4,"-",(empno-1)) as series from Q4;
+select concat((empno+1)-4,"-",(empno-1)) as series from Q4 order by empno;
 
-KD3_SHAMGIRHE_83602=>select concat((empno+1)-4,"-",(empno-1)) as series from Q4;
+select concat((empno+1)-4,"-",(empno-1)) as series from Q4 order by empno;
 +--------+
 | series |
 +--------+
 | 2-4    |
 | 6-8    |
 | 11-13  |
-| 22-24  |
 | 17-19  |
+| 22-24  |
 +--------+
 5 rows in set (0.00 sec)
-
 
 ```
