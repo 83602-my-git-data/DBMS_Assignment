@@ -834,28 +834,3 @@ KD3_SHAM_83602>select * from orders
 9 rows in set (0.00 sec)
 ```
 
-select a.ad from (select snum as ad from salespeople where city="san joes"
-          union all
-         select snum as ad from customers where city="san jose") abcd a , abcd b  
-         where a.ad != b.ad;
-         
-  select ad from
-         (select snum as ad from salespeople where city="san joes"
-          union all
-         select snum as ad from customers where city="san jose") abc ;
-
-
-select a.ad from (select snum as ad from salespeople where city="san joes"
-          union all
-         select snum as ad from customers where city="san jose") ab a ,(select snum as ad from salespeople where city="san joes"
-          union all
-         select snum as a from customers where city="san jose") cd b  
-         where a.ad != b.a;         
-
-select concat((empno-1),"-",(empno+1)) from Q4;
-
-select concat((empno+1)-4,"-",(empno-1)) from Q4;
-
-select (empno+1)-4 , empno-1 from Q4;
-
-select empno 
