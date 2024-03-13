@@ -714,7 +714,6 @@ KD3_SHAM_83602>select * from orders
 +------+---------+------------+------+------+
 2 rows in set (0.00 sec)
 
-KD3_SHAM_83602>
 KD3_SHAM_83602> SELECT c.cname, c.rating
    -> FROM customers c
    -> WHERE c.cnum IN (
@@ -734,7 +733,6 @@ KD3_SHAM_83602> SELECT c.cname, c.rating
 +---------+--------+
 2 rows in set (0.00 sec)
 
-KD3_SHAM_83602>
 KD3_SHAM_83602>select total from (select snum , sum(amt) as total from orders group by snum) as totals
    -> where total > (select max(amt) from orders);
 +----------+
@@ -834,4 +832,25 @@ KD3_SHAM_83602>select * from orders
 | 3010 | 1309.95 | 1990-10-06 | 2004 | 1002 |
 +------+---------+------------+------+------+
 9 rows in set (0.00 sec)
-```Database
+```
+
+select a.ad from (select snum as ad from salespeople where city="san joes"
+          union all
+         select snum as ad from customers where city="san jose") abcd a , abcd b  
+         where a.ad != b.ad;
+         
+  select ad from
+         (select snum as ad from salespeople where city="san joes"
+          union all
+         select snum as ad from customers where city="san jose") abc ;
+
+
+select a.ad from (select snum as ad from salespeople where city="san joes"
+          union all
+         select snum as ad from customers where city="san jose") ab a ,(select snum as ad from salespeople where city="san joes"
+          union all
+         select snum as a from customers where city="san jose") cd b  
+         where a.ad != b.a;         
+
+select concat(0,"-",empno-1) a from Q4;
+select concat(empno+1,"-",0) b from Q4;
