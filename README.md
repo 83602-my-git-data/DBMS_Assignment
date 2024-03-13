@@ -631,8 +631,7 @@ cname = 'hoffman'
 );
 or
 select c.cname, c.city from customers c, customers d
- where d.rating = c.rating
- having cname = 'hoffman';
+ where d.rating = c.rating and d.cname = 'hoffman';
 ```
 
 # answers
@@ -664,17 +663,16 @@ KD3_SHAM_83602>select cname , city from customers
 
 KD3_SHAM_83602>select c.cname, c.city from customers c, customers d
     ->  where d.rating = c.rating
-    ->  having cname = 'hoffman';
+    ->  and d.cname = 'hoffman';
 +---------+--------+
 | cname   | city   |
 +---------+--------+
 | hoffman | london |
-| hoffman | london |
-| hoffman | london |
+| clemens | london |
+| pereira | rome   |
 +---------+--------+
 3 rows in set (0.00 sec)
 
-KD3_SHAM_83602>
 ```
 
 # Assignments 11
