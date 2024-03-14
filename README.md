@@ -755,7 +755,9 @@ select * from orders
 select * from orders
      where amt <(select max(o.amt) from orders o ,customers c where c.cnum=o.cnum and c.city='london');
 ```
+
 # answer
+
 ```
 KD3_SHAM_83602>select * from customers
     ->     where rating >= any(select c.rating from customers c, salespeople s where s.snum=c.snum);
@@ -832,3 +834,32 @@ KD3_SHAM_83602>select * from orders
 9 rows in set (0.00 sec)
 ```
 
+# Assignments 13
+
+```
+1. select cname , city , concat(rating," Low Rating") from customers where rating < 200
+    union
+   select cname , city, concat(rating," High Rating") from customers where rating >200;
+
+select snum from salespeople where city='san jose'
+union 
+select snum from customers where   
+```
+
+# Answers
+
+```
+KD3_SHAMGIRHE_83602=>select cname , city , concat(rating," Low Rating") from customers where rating < 200
+    ->     union
+    ->    select cname , city, concat(rating," High Rating") from customers where rating >200;
++----------+----------+------------------------------+
+| cname    | city     | concat(rating," Low Rating") |
++----------+----------+------------------------------+
+| hoffman  | london   | 100 Low Rating               |
+| clemens  | london   | 100 Low Rating               |
+| pereira  | rome     | 100 Low Rating               |
+| grass    | berlin   | 300 High Rating              |
+| cisneros | san jose | 300 High Rating              |
++----------+----------+------------------------------+
+5 rows in set (0.00 sec)
+```
