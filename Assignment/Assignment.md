@@ -841,9 +841,22 @@ KD3_SHAM_83602>select * from orders
     union
    select cname , city, concat(rating," High Rating") from customers where rating >200;
 
-select snum from salespeople where city='san jose'
-union 
-select snum from customers where   
+select Sname,Snum from SALESPEOPLE
+where Snum=any(select Snum from ORDERS group by Snum having count(Amt)>1)
+union
+select Cname,Cnum from CUSTOMERS where Cnum=any(select Cnum from ORDERS group by Cnum having count(Amt)>1);
+
+
+select Snum from SALESPEOPLE
+where City="San Jose"
+union
+select Cnum from CUSTOMERS
+where City="San Jose"
+union all
+select Onum from ORDERS
+where Odate="1990-10-03";
+
+
 ```
 
 # Answers
