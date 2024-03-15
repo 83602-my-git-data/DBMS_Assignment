@@ -123,6 +123,24 @@ select * from ans;
 
 # Assignments 2
 
+**1.Select from any table a number and determine whether it is within a given range (for
+example, between 1 and 10).**
+
+```
+delimiter //
+create procedure Q1(out output varchar(20))
+begin
+declare no int;
+select deptno into no from dept where dname='ACCOUNTING';
+if no>0 and no<=10 then set output="With in Range";
+else set output="Not in Particular Range";
+end if;
+end; //
+delimiter ;
+call Q1(@output);
+select @output from dual;
+```
+
 **2.Select from any table three positive integers representing the sides of a triangle, and
 determine whether they form a valid triangle. Hint: In a triangle, the sum of any two
 sides must always be greater than the third side.**
